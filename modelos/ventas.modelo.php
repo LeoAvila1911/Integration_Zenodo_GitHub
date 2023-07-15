@@ -1,6 +1,6 @@
 <?php
 
-require_once "conexion.php";
+include_once 'Database.php';
 
 class ModeloVentas{
 
@@ -12,28 +12,32 @@ class ModeloVentas{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
 			$stmt -> execute();
 
-			return $stmt -> fetch();
+			$aux = $stmt -> fetch();
+
+			Database::disconnect();
+
+			return $aux;
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
 			$stmt -> execute();
 
-			return $stmt -> fetchAll();
+			$aux = $stmt -> fetchAll();
+
+			Database::disconnect();
+
+			return $aux;
 
 		}
 		
-		$stmt -> close();
-
-		$stmt = null;
-
 	}
 
 	/*=============================================
@@ -42,7 +46,7 @@ class ModeloVentas{
 
 	static public function mdlIngresarVenta($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, metodo_pago) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :metodo_pago)");
+		$stmt = Database::connect()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, metodo_pago) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :metodo_pago)");
 
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -53,18 +57,19 @@ class ModeloVentas{
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
 		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
 
-		if($stmt->execute()){
+		$status = $stmt->execute();
 
-			return "ok";
+		Database::disconnect();
+		
+		if($status){
+
+			return "ok";	
 
 		}else{
 
 			return "error";
 		
 		}
-
-		$stmt->close();
-		$stmt = null;
 
 	}
 
@@ -74,7 +79,7 @@ class ModeloVentas{
 
 	static public function mdlEditarVenta($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  id_cliente = :id_cliente, id_vendedor = :id_vendedor, productos = :productos, impuesto = :impuesto, neto = :neto, total= :total, metodo_pago = :metodo_pago WHERE codigo = :codigo");
+		$stmt = Database::connect()->prepare("UPDATE $tabla SET  id_cliente = :id_cliente, id_vendedor = :id_vendedor, productos = :productos, impuesto = :impuesto, neto = :neto, total= :total, metodo_pago = :metodo_pago WHERE codigo = :codigo");
 
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -85,18 +90,19 @@ class ModeloVentas{
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
 		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
 
-		if($stmt->execute()){
+		$status = $stmt->execute();
 
-			return "ok";
+		Database::disconnect();
+		
+		if($status){
+
+			return "ok";	
 
 		}else{
 
 			return "error";
 		
 		}
-
-		$stmt->close();
-		$stmt = null;
 
 	}
 
@@ -106,23 +112,23 @@ class ModeloVentas{
 
 	static public function mdlEliminarVenta($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+		$stmt = Database::connect()->prepare("DELETE FROM $tabla WHERE id = :id");
 
 		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		$status = $stmt->execute();
 
-			return "ok";
+		Database::disconnect();
 		
+		if($status){
+
+			return "ok";	
+
 		}else{
 
-			return "error";	
-
+			return "error";
+		
 		}
-
-		$stmt -> close();
-
-		$stmt = null;
 
 	}
 
@@ -134,20 +140,28 @@ class ModeloVentas{
 
 		if($fechaInicial == null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
 			$stmt -> execute();
 
-			return $stmt -> fetchAll();	
+			$aux = $stmt -> fetchAll();
+
+			Database::disconnect();
+
+			return $aux;
 
 
 		}else if($fechaInicial == $fechaFinal){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%' ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%' ORDER BY id DESC");
 
 			$stmt -> execute();
 
-			return $stmt -> fetchAll();
+			$aux = $stmt -> fetchAll();
+
+			Database::disconnect();
+
+			return $aux;
 
 		}else{
 
@@ -161,18 +175,22 @@ class ModeloVentas{
 
 			if($fechaFinalMasUno == $fechaActualMasUno){
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' ORDER BY id DESC");
+				$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' ORDER BY id DESC");
 
 			}else{
 
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal' ORDER BY id DESC");
+				$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal' ORDER BY id DESC");
 
 			}
 		
 			$stmt -> execute();
 
-			return $stmt -> fetchAll();
+			$aux = $stmt -> fetchAll();
+
+			Database::disconnect();
+
+			return $aux;
 
 		}
 
@@ -184,15 +202,15 @@ class ModeloVentas{
 
 	static public function mdlSumaTotalVentas($tabla){	
 
-		$stmt = Conexion::conectar()->prepare("SELECT SUM(neto) as total FROM $tabla");
+		$stmt = Database::connect()->prepare("SELECT SUM(neto) as total FROM $tabla");
 
 		$stmt -> execute();
 
-		return $stmt -> fetch();
+		$aux = $stmt -> fetch();
 
-		$stmt -> close();
+		Database::disconnect();
 
-		$stmt = null;
+		return $aux;
 
 	}
 
