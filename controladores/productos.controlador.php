@@ -366,10 +366,11 @@ class ControladorProductos{
 
 		$item = null;
 		$valor = null;
-		$orden = "id";
-
-		$productos = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
-
+		$orden = "productos.id";
+		$inner = "INNER JOIN categorias ON categorias.id = productos.id_categoria";
+		
+		$productos = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden, $inner);
+		
 		$contenidoTabla = "<table border='0'> 
 				<tr> 
 					<td style='font-weight:bold; border:1px solid #eee;'>CÓDIGO</td> 
@@ -382,12 +383,10 @@ class ControladorProductos{
 				</tr>";
 
 		foreach ($productos as $row => $item) {
-			$categoria = ControladorCategorias::ctrMostrarCategorias("id", $item["id_categoria"]);
-
 			$contenidoTabla .= "<tr>
 					<td style='border:1px solid #eee;'>" . $item["codigo"] . "</td> 
 					<td style='border:1px solid #eee;'>" . $item["descripcion"] . "</td>
-					<td style='border:1px solid #eee;'>" . $categoria["categoria"] . "</td>
+					<td style='border:1px solid #eee;'>" . $item["categoria"] . "</td>
 					<td style='border:1px solid #eee;'>" . $item["stock"] . "</td>
 					<td style='border:1px solid #eee;'>" . $item["precio_compra"] . "</td>
 					<td style='border:1px solid #eee;'>" . $item["precio_venta"] . "</td>

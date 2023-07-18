@@ -14,7 +14,6 @@ class ControladorVentas{
 	static public function ctrMostrarVentas($item, $valor){
 
 		$tabla = "ventas";
-
 		$respuesta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
 
 		return $respuesta;
@@ -562,11 +561,11 @@ class ControladorVentas{
 	RANGO FECHAS
 	=============================================*/	
 
-	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal){
+	static public function ctrRangoFechasVentas($fechaInicial,$fechaFinal, $select='*', $inner = null){
 
 		$tabla = "ventas";
 
-		$respuesta = ModeloVentas::mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal);
+		$respuesta = ModeloVentas::mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal, $select, $inner);
 
 		return $respuesta;
 		
@@ -581,17 +580,22 @@ class ControladorVentas{
 		if(isset($_GET["reporte"])){
 
 			$tabla = "ventas";
-
+			$inner ="INNER JOIN clientes ON ventas.id_cliente = clientes.id 
+			INNER JOIN usuarios ON ventas.id_vendedor = usuarios.id";
+	
+			$select = "clientes.nombre AS ncliente, usuarios.nombre AS nusuario, ventas.*";
 			if(isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])){
 
-				$ventas = ModeloVentas::mdlRangoFechasVentas($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"]);
+				
+
+				$ventas = ModeloVentas::mdlRangoFechasVentas($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"], $select, $inner);
 
 			}else{
 
 				$item = null;
 				$valor = null;
 
-				$ventas = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
+				$ventas = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor, $inner, $select);
 
 			}
 
@@ -629,13 +633,10 @@ class ControladorVentas{
 
 			foreach ($ventas as $row => $item){
 
-				$cliente = ControladorClientes::ctrMostrarClientes("id", $item["id_cliente"]);
-				$vendedor = ControladorUsuarios::ctrMostrarUsuarios("id", $item["id_vendedor"]);
-
 			 echo utf8_decode("<tr>
 			 			<td style='border:1px solid #eee;'>".$item["codigo"]."</td> 
-			 			<td style='border:1px solid #eee;'>".$cliente["nombre"]."</td>
-			 			<td style='border:1px solid #eee;'>".$vendedor["nombre"]."</td>
+			 			<td style='border:1px solid #eee;'>".$item["ncliente"]."</td>
+			 			<td style='border:1px solid #eee;'>".$item["nusuario"]."</td>
 			 			<td style='border:1px solid #eee;'>");
 
 			 	$productos =  json_decode($item["productos"], true);
@@ -674,15 +675,13 @@ class ControladorVentas{
 	{
 
 		$tabla = "ventas";
+		$item = null;
+		$valor = null;
+		$inner ="INNER JOIN clientes ON ventas.id_cliente = clientes.id 
+          INNER JOIN usuarios ON ventas.id_vendedor = usuarios.id";
+		$select = "clientes.nombre AS ncliente, usuarios.nombre AS nusuario, ventas.*";
 
-		if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
-			$ventas = ModeloVentas::mdlRangoFechasVentas($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"]);
-		} else {
-			$item = null;
-			$valor = null;
-			$ventas = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
-		}
-
+		$ventas = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor,$inner, $select);
 		$contenidoTabla = "<table border='0'> 
 				<tr> 
 					<td style='font-weight:bold; border:1px solid #eee;'>CÓDIGO</td> 
@@ -698,13 +697,11 @@ class ControladorVentas{
 				</tr>";
 
 		foreach ($ventas as $row => $item) {
-			$cliente = ControladorClientes::ctrMostrarClientes("id", $item["id_cliente"]);
-			$vendedor = ControladorUsuarios::ctrMostrarUsuarios("id", $item["id_vendedor"]);
 
 			$contenidoTabla .= "<tr>
 					<td style='border:1px solid #eee;'>" . $item["codigo"] . "</td> 
-					<td style='border:1px solid #eee;'>" . $cliente["nombre"] . "</td>
-					<td style='border:1px solid #eee;'>" . $vendedor["nombre"] . "</td>
+					<td style='border:1px solid #eee;'>" . $item["ncliente"] . "</td>
+					<td style='border:1px solid #eee;'>" . $item["nusuario"] . "</td>
 					<td style='border:1px solid #eee;'>";
 
 			$productos = json_decode($item["productos"], true);
