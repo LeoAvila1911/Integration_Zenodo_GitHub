@@ -133,7 +133,12 @@ if($xml){
 
           }
 
-          $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+          $inner ="INNER JOIN clientes ON ventas.id_cliente = clientes.id 
+          INNER JOIN usuarios ON ventas.id_vendedor = usuarios.id";
+          
+          $select = "clientes.nombre AS ncliente, usuarios.nombre AS nusuario, ventas.*";
+
+          $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal, $select, $inner);
 
           foreach ($respuesta as $key => $value) {
            
@@ -141,21 +146,11 @@ if($xml){
 
                   <td>'.($key+1).'</td>
 
-                  <td>'.$value["codigo"].'</td>';
+                  <td>'.$value["codigo"].'</td>
+                  
+                  <td>'.$value["ncliente"].'</td>
 
-                  $itemCliente = "id";
-                  $valorCliente = $value["id_cliente"];
-
-                  $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
-
-                  echo '<td>'.$respuestaCliente["nombre"].'</td>';
-
-                  $itemUsuario = "id";
-                  $valorUsuario = $value["id_vendedor"];
-
-                  $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
-
-                  echo '<td>'.$respuestaUsuario["nombre"].'</td>
+                  <td>'.$value["nusuario"].'</td>
 
                   <td>'.$value["metodo_pago"].'</td>
 
