@@ -16,7 +16,7 @@ class ModeloCategorias{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("categorias");
 
 		if($status){
 
@@ -44,7 +44,7 @@ class ModeloCategorias{
 
 			$stmt -> execute();
 
-			Database::disconnect();
+			Database::disconnect("categorias");
 
 			return $stmt -> fetch();
 
@@ -54,7 +54,7 @@ class ModeloCategorias{
 
 			$stmt -> execute();
 
-			Database::disconnect();
+			Database::disconnect("categorias");
 
 			return $stmt -> fetchAll();
 
@@ -75,7 +75,7 @@ class ModeloCategorias{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("categorias");
 
 		if($status){
 
@@ -101,7 +101,7 @@ class ModeloCategorias{
 
 		$status = $stmt -> execute();
 
-		Database::disconnect();
+		Database::disconnect("categorias");
 
 		if($status){
 

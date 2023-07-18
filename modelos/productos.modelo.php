@@ -8,31 +8,31 @@ class ModeloProductos{
 	MOSTRAR PRODUCTOS
 	=============================================*/
 
-	static public function mdlMostrarProductos($tabla, $item, $valor, $orden){
+	static public function mdlMostrarProductos($tabla, $item, $valor, $orden, $inner = null){
 
 		if($item != null){
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla $inner WHERE $item = :$item ORDER BY id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-
+				
 			$stmt -> execute();
 
 			$aux = $stmt -> fetch();
 
-			Database::disconnect();
+			Database::disconnect("productos1");
 
 			return $aux;
 
 		}else{
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla $inner ORDER BY $orden DESC");
 
 			$stmt -> execute();
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("productos2");
 
 			return $aux;
 
@@ -57,7 +57,7 @@ class ModeloProductos{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("productos3");
 
 		if($status){
 
@@ -89,7 +89,7 @@ class ModeloProductos{
 		
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("productos4");
 		
 		if($status){
 
@@ -115,7 +115,7 @@ class ModeloProductos{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("productos5");
 		
 		if($status){
 
@@ -142,7 +142,7 @@ class ModeloProductos{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("productos6");
 		
 		if($status){
 
@@ -168,7 +168,7 @@ class ModeloProductos{
 
 		$aux = $stmt -> fetch();
 
-		Database::disconnect();
+		Database::disconnect("productos7");
 
 		return $aux;
 

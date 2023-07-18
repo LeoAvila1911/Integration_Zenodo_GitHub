@@ -20,7 +20,7 @@ class ModeloUsuarios{
 
 			$aux = $stmt -> fetch();
 
-			Database::disconnect();
+			Database::disconnect("usuarios1");
 
 			return $aux;
 
@@ -32,7 +32,7 @@ class ModeloUsuarios{
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("usuarios2");
 
 			return $aux;
 
@@ -56,7 +56,7 @@ class ModeloUsuarios{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("usuarios3");
 		
 		if($status){
 
@@ -86,7 +86,7 @@ class ModeloUsuarios{
 
 		$status = $stmt -> execute();
 		
-		Database::disconnect();
+		Database::disconnect("usuarios4");
 
 		if($status){
 
@@ -113,7 +113,7 @@ class ModeloUsuarios{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("usuarios5");
 		
 		if($status){
 
@@ -139,7 +139,7 @@ class ModeloUsuarios{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("usuarios6");
 		
 		if($status){
 

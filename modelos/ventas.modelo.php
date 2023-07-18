@@ -8,11 +8,11 @@ class ModeloVentas{
 	MOSTRAR VENTAS
 	=============================================*/
 
-	static public function mdlMostrarVentas($tabla, $item, $valor){
+	static public function mdlMostrarVentas($tabla, $item, $valor, $inner = null, $select='*'){
 
 		if($item != null){
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
+			$stmt = Database::connect()->prepare("SELECT $select FROM $tabla $inner WHERE $item = :$item ORDER BY id ASC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -20,19 +20,19 @@ class ModeloVentas{
 
 			$aux = $stmt -> fetch();
 
-			Database::disconnect();
+			Database::disconnect("ventas");
 
 			return $aux;
 
 		}else{
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT $select FROM $tabla $inner ORDER BY id DESC");
 
 			$stmt -> execute();
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("ventas");
 
 			return $aux;
 
@@ -59,7 +59,7 @@ class ModeloVentas{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("ventas");
 		
 		if($status){
 
@@ -92,7 +92,7 @@ class ModeloVentas{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("ventas");
 		
 		if($status){
 
@@ -118,7 +118,7 @@ class ModeloVentas{
 
 		$status = $stmt->execute();
 
-		Database::disconnect();
+		Database::disconnect("ventas");
 		
 		if($status){
 
@@ -136,30 +136,30 @@ class ModeloVentas{
 	RANGO FECHAS
 	=============================================*/	
 
-	static public function mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal){
+	static public function mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal, $select='*', $inner = null){
 
 		if($fechaInicial == null){
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT $select FROM $tabla $inner ORDER BY $tabla.id DESC");
 
 			$stmt -> execute();
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("ventas1");
 
 			return $aux;
 
 
 		}else if($fechaInicial == $fechaFinal){
 
-			$stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%' ORDER BY id DESC");
+			$stmt = Database::connect()->prepare("SELECT * FROM $tabla $inner WHERE fecha like '%$fechaFinal%' ORDER BY $tabla.id DESC");
 
 			$stmt -> execute();
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("ventas2");
 
 			return $aux;
 
@@ -188,7 +188,7 @@ class ModeloVentas{
 
 			$aux = $stmt -> fetchAll();
 
-			Database::disconnect();
+			Database::disconnect("ventas3");
 
 			return $aux;
 
@@ -208,7 +208,7 @@ class ModeloVentas{
 
 		$aux = $stmt -> fetch();
 
-		Database::disconnect();
+		Database::disconnect("ventas");
 
 		return $aux;
 
