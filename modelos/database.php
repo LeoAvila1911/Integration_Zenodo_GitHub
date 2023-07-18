@@ -19,7 +19,7 @@ class Database
     private static $dbName = 'u911849556_inventario';
     private static $dbHost = '92.249.44.207';
     private static $dbUsername = 'u911849556_inventario';
-    private static $dbUserPassword = 'L@LKiE11N|s9';
+    private static $dbUserPassword = 't!3Jw4G1f1J2';
 
     //Propiedad para control de la conexion:
     private static $conexion = null;
