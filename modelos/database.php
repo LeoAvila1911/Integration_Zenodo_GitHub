@@ -53,8 +53,10 @@ class Database
     /**
      * Metodo estatico para desconexion de la bdd.
      */
-    public static function disconnect()
+    public static function disconnect($funcion)
     {
+        error_log("contador de desconexiones ". $funcion);
+
         self::$conexion = null;
     }
 }
