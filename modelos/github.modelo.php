@@ -18,7 +18,7 @@ class Github
             exec($command);
         }
 
-        $pushCommand = 'cd C:\xampp\htdocs\Integration_Zenodo_GitHub && git push origin master'; // Reemplaza /ruta/a/repo con la ruta a tu repositorio local
+        $pushCommand = 'cd C:\xampp\htdocs\Integration_Zenodo_GitHub && git push origin main'; // Reemplaza /ruta/a/repo con la ruta a tu repositorio local
         exec($pushCommand);
 
     }
