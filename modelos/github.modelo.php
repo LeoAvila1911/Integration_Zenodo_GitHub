@@ -27,9 +27,9 @@ class Github
     {
         $owner = 'LeoAvila1911'; // Reemplaza con el nombre del propietario del repositorio
         $repo = 'Integration_Zenodo_GitHub'; // Reemplaza con el nombre de tu repositorio
-        $tag = 'v3.0.0'; // Reemplaza con la etiqueta (tag) del release
-        $releaseName = 'Release 3.0.0'; // Reemplaza con el nombre del release
-        $releaseBody = 'Prueba Release 3.0.0'; // Reemplaza con la descripción del release
+        $tag = 'v4.0.0'; // Reemplaza con la etiqueta (tag) del release
+        $releaseName = 'Release 4.0.0'; // Reemplaza con el nombre del release
+        $releaseBody = 'Prueba Release 4.0.0'; // Reemplaza con la descripción del release
         $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
 
         $url = "https://api.github.com/repos/{$owner}/{$repo}/releases";
