@@ -52,13 +52,8 @@ class Github
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
         $response = curl_exec($ch);
         curl_close($ch);
-/* print_r($response);
-exit; */
-        if ($response) {
-            echo 'Release creado exitosamente.';
-        } else {
-            echo 'Error al crear el release.';
-        }
+        print_r($response);
+        exit;
 
     }
 
