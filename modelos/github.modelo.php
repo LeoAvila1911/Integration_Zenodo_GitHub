@@ -30,7 +30,7 @@ class Github
         $tag = 'v4.0.0'; // Reemplaza con la etiqueta (tag) del release
         $releaseName = 'Release 4.0.0'; // Reemplaza con el nombre del release
         $releaseBody = 'Prueba Release 4.0.0'; // Reemplaza con la descripción del release
-        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
+        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
 
         $url = "https://api.github.com/repos/{$owner}/{$repo}/releases";
 
