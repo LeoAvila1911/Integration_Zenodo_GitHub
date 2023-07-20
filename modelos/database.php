@@ -16,10 +16,10 @@ class Database
     //    private static $dbUsername = 'u911849556_gestion';
     //    private static $dbUserPassword = 'OJNGH|GR';
 
-    private static $dbName = 'u911849556_inventario';
-    private static $dbHost = '92.249.44.207';
-    private static $dbUsername = 'u911849556_inventario';
-    private static $dbUserPassword = 't!3Jw4G1f1J2';
+    private static $dbName = 'pos';
+    private static $dbHost = 'localhost';
+    private static $dbUsername = 'root';
+    private static $dbUserPassword = '';
 
     //Propiedad para control de la conexion:
     private static $conexion = null;
