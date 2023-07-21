@@ -16,7 +16,7 @@ class Database
     //    private static $dbUsername = 'u911849556_gestion';
     //    private static $dbUserPassword = 'OJNGH|GR';
 
-    private static $dbName = 'inventario';
+    private static $dbName = 'pos';
     private static $dbHost = 'localhost';
     private static $dbUsername = 'root';
     private static $dbUserPassword = '';

@@ -11,8 +11,7 @@ $releaseName = $_REQUEST['nomtag'];
 $releaseBody = $_REQUEST['desctag'];
 $githubToken = $_REQUEST['token'];
 
-print_r($github->realizarPush());
-print_r("<br>");
-print_r($github->crearRelease($tag, $releaseName, $releaseBody, $githubToken));
-exit;
+$github->realizarPush();
+
+$github->crearRelease($tag, $releaseName, $releaseBody, $githubToken);
 header('Location: ../github?github=success');
