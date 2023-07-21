@@ -23,14 +23,14 @@ class Github
 
     }
 
-    public function crearRelease()
+    public function crearRelease($tag, $releaseName, $releaseBody, $githubToken)
     {
         $owner = 'LeoAvila1911'; // Reemplaza con el nombre del propietario del repositorio
         $repo = 'Integration_Zenodo_GitHub'; // Reemplaza con el nombre de tu repositorio
-        $tag = 'v4.0.0'; // Reemplaza con la etiqueta (tag) del release
-        $releaseName = 'Release 4.0.0'; // Reemplaza con el nombre del release
-        $releaseBody = 'Prueba Release 4.0.0'; // Reemplaza con la descripción del release
-        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
+        //$tag = 'v4.0.0'; // Reemplaza con la etiqueta (tag) del release
+        //$releaseName = 'Release 4.0.0'; // Reemplaza con el nombre del release
+        //$releaseBody = 'Prueba Release 4.0.0'; // Reemplaza con la descripción del release
+        //$githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
 
         $url = "https://api.github.com/repos/{$owner}/{$repo}/releases";
 

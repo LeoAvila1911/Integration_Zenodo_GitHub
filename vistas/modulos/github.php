@@ -2,14 +2,13 @@
 
 if ($_SESSION["perfil"] == "Especial") {
 
-    echo '<script>
+  echo '<script>
 
     window.location = "inicio";
 
   </script>';
 
-    return;
-
+  return;
 }
 
 ?>
@@ -20,7 +19,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
     <h1>
 
-      Crear venta
+      Integración
 
     </h1>
 
@@ -28,7 +27,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-      <li class="active">Crear venta</li>
+      <li class="active">Integración</li>
 
     </ol>
 
@@ -48,7 +47,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
           <div class="box-header with-border"></div>
 
-          <form role="form" method="post" class="formularioVenta">
+          <form method="post" action="controladores/github.controlador.php">
 
             <div class="box-body">
 
@@ -62,14 +61,12 @@ if ($_SESSION["perfil"] == "Especial") {
 
                   <div class="input-group">
 
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
 
-                    <input type="text" class="form-control" id="commit" value="">
+                    <input type="text" placeholder="Nombre del commit" class="form-control" name="commit" id="commit" value="">
 
 
                   </div>
-
-
 
                 </div>
 
@@ -79,12 +76,12 @@ if ($_SESSION["perfil"] == "Especial") {
 
                 <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control" id="tag" value="">
-                </div>
+                    <input type="text" placeholder="Versión del tag" class="form-control" name="tag" value="">
+                  </div>
 
                 </div>
 
@@ -94,12 +91,12 @@ if ($_SESSION["perfil"] == "Especial") {
 
                 <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control" id="nomtag" value="">
-                </div>
+                    <input type="text" placeholder="Nombre del tag" class="form-control" name="nomtag" value="">
+                  </div>
 
                 </div>
 
@@ -109,17 +106,16 @@ if ($_SESSION["perfil"] == "Especial") {
 
                 <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control" id="tag" value="">
+                    <input type="text" placeholder="Descripción del tag" class="form-control" name="desctag" value="">
+
+                  </div>
 
                 </div>
 
-                </div>
-
-                <input type="hidden" id="listaProductos" name="listaProductos">
 
                 <!--=====================================
                 TOKEN ACCESS
@@ -127,45 +123,39 @@ if ($_SESSION["perfil"] == "Especial") {
 
                 <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control" id="tag" value="">
+                    <input type="text" placeholder="Token access" class="form-control" name="token" value="">
+
+                  </div>
 
                 </div>
-
-                </div>
-                <hr>
 
                 <!--=====================================
                 ENTRADA MÉTODO DE PAGO
                 ======================================-->
 
-
-
                 <br>
 
               </div>
+              <div class="pull-right">
 
-          </div>
+                <button type="submit" class="btn btn-primary pull-right">Aceptar</button>
+
+              </div>
+            </div>
 
 
-
-        </form>
-        
-
+          </form>
 
         </div>
 
       </div>
 
-      <!--=====================================
-      LA TABLA DE PRODUCTOS
-      ======================================-->
-
     </div>
-    <div class="box-footer">
 
+  </section>
 
-    </div>
+</div>
