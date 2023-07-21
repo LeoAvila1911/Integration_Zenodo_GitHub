@@ -265,4 +265,18 @@ class Zenodo
 
         return $aux;
     }
+
+    public function actualizarTokenGit($tabla, $where)
+    {
+
+        $stmt = Database::connect()->prepare("UPDATE $tabla set estado = 0  WHERE $where");
+
+        $stmt->execute();
+
+        $aux = $stmt->fetch();
+
+        Database::disconnect("zenodo");
+
+        return $aux;
+    }
 }

@@ -12,13 +12,17 @@ $zenodo = new Zenodo();
 $tabla = 'tokens';
 $where = "estado = 1";
 $tokens = $zenodo->obtenerTokenGit($tabla, $where);
+$githubToken = $tokens['token'];
+$tokenid = $tokens['id'];
+
+$where = "id = $tokenid";
+$zenodo->actualizarTokenGit($tabla, $where);
 
 // Inicialización de variables
 $commit = $_REQUEST['commit'];
 $tag = $_REQUEST['tag'];
 $releaseName = $_REQUEST['nomtag'];
 $releaseBody = $_REQUEST['desctag'];
-$githubToken = $prueba['token'];
 
 $github->realizarPush();
 
