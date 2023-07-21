@@ -162,7 +162,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
 <script>
 	// Obtener el parámetro de la URL
-	const urlParams2 = new URLSearchParams(window.location.search);
+	const urlParams = new URLSearchParams(window.location.search);
 	const github = urlParams.get('github');
 
 	// Verificar si hay una alerta y mostrarla
