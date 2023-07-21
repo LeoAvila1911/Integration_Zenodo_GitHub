@@ -4,10 +4,9 @@ class Github
 {
     public function realizarPush()
     {
-        $repoOwner = 'LeoAvila1911'; // Reemplaza con el nombre del propietario del repositorio
         $repoName = 'Integration_Zenodo_GitHub'; // Reemplaza con el nombre de tu repositorio
         $commitMessage = 'prueba 0.1.1'; // Reemplaza con el mensaje del commit
-        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
+        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
 
         $commitCommands = array(
             'cd C:\xampp\htdocs\Integration_Zenodo_GitHub && git add . && git commit -m "' . $commitMessage . '"',
