@@ -159,3 +159,24 @@ if ($_SESSION["perfil"] == "Especial") {
   </section>
 
 </div>
+
+<script>
+	// Obtener el parámetro de la URL
+	const urlParams2 = new URLSearchParams(window.location.search);
+	const github = urlParams.get('github');
+
+	// Verificar si hay una alerta y mostrarla
+	if (github === 'success') {
+		swal({
+			type: "success",
+			title: "El archivo se exportó a GitHub correctamente",
+			showConfirmButton: true,
+			confirmButtonText: "Cerrar",
+			closeOnConfirm: false
+		}).then(function(result) {
+			if (result.value) {
+				window.location = "github";
+			}
+		});
+	}
+</script>
