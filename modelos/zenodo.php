@@ -247,4 +247,22 @@ class Zenodo
         // Cerrar la conexión cURL
         curl_close($curl);
     }
+
+    /*=============================================
+	MOSTRAR SUMA VENTAS
+	=============================================*/
+
+    public function obtenerTokenGit($tabla, $where)
+    {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $tabla WHERE $where ORDER BY id LIMIT 1");
+
+        $stmt->execute();
+
+        $aux = $stmt->fetch();
+
+        Database::disconnect("zenodo");
+
+        return $aux;
+    }
 }

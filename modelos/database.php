@@ -20,7 +20,7 @@ class Database
     private static $dbHost = 'localhost';
     private static $dbUsername = 'root';
     private static $dbUserPassword = '';
-
+ 
     //Propiedad para control de la conexion:
     private static $conexion = null;
 
