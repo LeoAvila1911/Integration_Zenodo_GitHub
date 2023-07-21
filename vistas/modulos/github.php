@@ -121,17 +121,7 @@ if ($_SESSION["perfil"] == "Especial") {
                 TOKEN ACCESS
                 ======================================-->
 
-                <div class="form-group">
-
-                  <div class="input-group">
-
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
-                    <input type="text" placeholder="Token access" class="form-control" name="token" value="">
-
-                  </div>
-
-                </div>
+    
 
                 <!--=====================================
                 ENTRADA MÉTODO DE PAGO
