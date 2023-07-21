@@ -1,19 +1,19 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Administrar usuarios
-    
+
     </h1>
 
     <ol class="breadcrumb">
-      
+
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Administrar usuarios</li>
-    
+
     </ol>
 
   </section>
@@ -23,9 +23,9 @@
     <div class="box">
 
       <div class="box-header with-border">
-  
+
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
-          
+
           Agregar usuario
 
         </button>
@@ -33,13 +33,13 @@
       </div>
 
       <div class="box-body">
-        
+
        <table class="table table-bordered table-striped dt-responsive tablas">
-         
+
         <thead>
-         
+
          <tr>
-           
+
            <th style="width:10px">#</th>
            <th>Nombre</th>
            <th>Usuario</th>
@@ -49,12 +49,12 @@
            <th>Último login</th>
            <th>Acciones</th>
 
-         </tr> 
+         </tr>
 
         </thead>
 
         <tbody>
-          
+
           <tr>
             <td>1</td>
             <td>Usuario Administrador</td>
@@ -66,12 +66,12 @@
             <td>
 
               <div class="btn-group">
-                  
+
                 <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
                 <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
-              </div>  
+              </div>
 
             </td>
 
@@ -88,12 +88,12 @@
             <td>
 
               <div class="btn-group">
-                  
+
                 <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
                 <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
-              </div>  
+              </div>
 
             </td>
 
@@ -110,12 +110,12 @@
             <td>
 
               <div class="btn-group">
-                  
+
                 <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
                 <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
-              </div>  
+              </div>
 
             </td>
 
@@ -138,12 +138,12 @@ MODAL AGREGAR USUARIO
 ======================================-->
 
 <div id="modalAgregarUsuario" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
 
-      <form role="form" method="post" enctype="multipart/form-data">
+      <form role="form" id="formulario" method="post" enctype="multipart/form-data">
 
         <!--=====================================
         CABEZA DEL MODAL
@@ -164,17 +164,17 @@ MODAL AGREGAR USUARIO
         <div class="modal-body">
 
           <div class="box-body">
-
+          
             <!-- ENTRADA PARA EL NOMBRE -->
-            
+
             <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+              <div class="input-group" id="grupo_nombre">
 
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text"  class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre"  required>
+                
               </div>
 
             </div>
@@ -182,10 +182,10 @@ MODAL AGREGAR USUARIO
             <!-- ENTRADA PARA EL USUARIO -->
 
              <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
 
                 <input type="text" class="form-control input-lg" name="nuevoUsuario" placeholder="Ingresar usuario" required>
 
@@ -196,10 +196,10 @@ MODAL AGREGAR USUARIO
             <!-- ENTRADA PARA LA CONTRASEÑA -->
 
              <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
                 <input type="password" class="form-control input-lg" name="nuevoPassword" placeholder="Ingresar contraseña" required>
 
@@ -210,13 +210,13 @@ MODAL AGREGAR USUARIO
             <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-users"></i></span>
 
                 <select class="form-control input-lg" name="nuevoPerfil">
-                  
+
                   <option value="">Selecionar perfil</option>
 
                   <option value="Administrador">Administrador</option>
@@ -234,7 +234,7 @@ MODAL AGREGAR USUARIO
             <!-- ENTRADA PARA SUBIR FOTO -->
 
              <div class="form-group">
-              
+
               <div class="panel">SUBIR FOTO</div>
 
               <input type="file" id="nuevaFoto" name="nuevaFoto">
@@ -268,5 +268,4 @@ MODAL AGREGAR USUARIO
   </div>
 
 </div>
-
-
+<script src="../js/validaciones.js"></script>

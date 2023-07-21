@@ -58,7 +58,7 @@ if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial")
 
 }
 
-if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
+if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor" || $_SESSION["perfil"] == "Especial") {
 
     echo '<li>
 

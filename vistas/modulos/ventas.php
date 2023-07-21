@@ -69,14 +69,6 @@ if($xml){
 
         </a>
 
-        <a href="controladores/github.controlador.php">
-          <button class="btn btn-primary">
-            
-            Exportar a GitHub
-
-          </button>
-
-        </a>
 
          <button type="button" class="btn btn-default pull-right" id="daterange-btn">
            
