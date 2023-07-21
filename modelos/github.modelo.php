@@ -52,9 +52,9 @@ class Github
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
         $response = curl_exec($ch);
         curl_close($ch);
-        print_r($response);
+        /* print_r($response);
         exit;
-
+ */
     }
 
 }

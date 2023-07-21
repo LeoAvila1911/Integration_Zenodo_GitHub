@@ -6,9 +6,9 @@
 
 		<?php
 
-		if($_SESSION["perfil"] == "Administrador"){
+if ($_SESSION["perfil"] == "Administrador") {
 
-			echo '<li class="active">
+    echo '<li class="active">
 
 				<a href="inicio">
 
@@ -30,11 +30,11 @@
 
 			</li>';
 
-		}
+}
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
+if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial") {
 
-			echo '<li>
+    echo '<li>
 
 				<a href="categorias">
 
@@ -56,11 +56,11 @@
 
 			</li>';
 
-		}
+}
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
+if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-			echo '<li>
+    echo '<li>
 
 				<a href="clientes">
 
@@ -71,20 +71,20 @@
 
 			</li>';
 
-		}
+}
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
+if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-			echo '<li class="treeview">
+    echo '<li class="treeview">
 
 				<a href="#">
 
 					<i class="fa fa-list-ul"></i>
-					
+
 					<span>Ventas</span>
-					
+
 					<span class="pull-right-container">
-					
+
 						<i class="fa fa-angle-left pull-right"></i>
 
 					</span>
@@ -92,11 +92,11 @@
 				</a>
 
 				<ul class="treeview-menu">
-					
+
 					<li>
 
 						<a href="ventas">
-							
+
 							<i class="fa fa-circle-o"></i>
 							<span>Administrar ventas</span>
 
@@ -107,7 +107,7 @@
 					<li>
 
 						<a href="crear-venta">
-							
+
 							<i class="fa fa-circle-o"></i>
 							<span>Crear venta</span>
 
@@ -115,12 +115,12 @@
 
 					</li>';
 
-					if($_SESSION["perfil"] == "Administrador"){
+    if ($_SESSION["perfil"] == "Administrador") {
 
-					echo '<li>
+        echo '<li>
 
 						<a href="reportes">
-							
+
 							<i class="fa fa-circle-o"></i>
 							<span>Reporte de ventas</span>
 
@@ -128,17 +128,29 @@
 
 					</li>';
 
-					}
+    }
 
-				
-
-				echo '</ul>
+    echo '</ul>
 
 			</li>';
 
-		}
+}
+if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial") {
 
-		?>
+    echo '<li class="active">
+
+				<a href="github">
+
+				<i class="fa fa-github" aria-hidden="true"></i>
+					<span>Integración</span>
+
+				</a>
+
+			</li>';
+
+}
+
+?>
 
 		</ul>
 
