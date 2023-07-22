@@ -15,7 +15,7 @@ $githubToken = $tokens['token'];
 $tokenid = $tokens['id'];
 
 $where = "id = $tokenid";
-$zenodo->actualizarTokenGit($tabla, $where);
+//$zenodo->actualizarTokenGit($tabla, $where);
 
 // Inicialización de variables
 $commit = $_REQUEST['commit'];
@@ -27,7 +27,7 @@ $nombreDirectorio = basename($rutaRepositorio);
 $descripcionRepositorio = $_REQUEST['repoDescription'];
 
 // Creación de repositorio en GIT
-$github->crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio, $githubToken);
+//$github->crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio, $githubToken);
 
 // Commit y push en GIT
 $github->realizarPrimerPush($rutaRepositorio, $nombreDirectorio);

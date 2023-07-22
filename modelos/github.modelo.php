@@ -60,23 +60,28 @@ class Github
 
     public function realizarPrimerPush($rutaRepositorio, $nombreDirectorio)
     {
-        // Agrega más comandos para cada carpeta que desees incluir en el push
+        // Crear el contenido que deseas agregar al archivo README.md
+        $contenido = "# " . $nombreDirectorio . "\nEste es el primer commit";
+
+        // Agregar los comandos necesarios para el commit y push
         $commitCommands = array(
-            'echo "# ' . $nombreDirectorio . '" >> README.md',
             'cd ' . $rutaRepositorio,
             'git init',
+            'echo "' . $contenido . '" >> README.md', // Agregar el contenido al archivo README.md
             'git add README.md',
             'git commit -m "first commit"',
             'git branch -M main',
-            'git remote add origin ' . $rutaRepositorio . '.git',
+            'git remote add origin https://github.com/LeoAvila1911/' . $nombreDirectorio . '.git',
             'git push -u origin main',
         );
 
-        // Lectura de comandos 
+        // Ejecutar los comandos
         foreach ($commitCommands as $command) {
             exec($command);
         }
     }
+
+
 
     public function realizarPush($rutaRepositorio)
     {
