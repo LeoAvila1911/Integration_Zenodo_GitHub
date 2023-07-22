@@ -7,7 +7,6 @@ require '../modelos/database.php';
 $github = new Github();
 $zenodo = new Zenodo();
 
-
 // Consulta a la base de tokens
 $tabla = 'tokens';
 $where = "estado = 1";
@@ -28,7 +27,10 @@ $nombreDirectorio = basename($rutaRepositorio);
 $descripcionRepositorio = $_REQUEST['repoDescription'];
 
 // Creación de repositorio en GIT
-$github->crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio);
+$github->crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio, $githubToken);
+
+// Commit y push en GIT
+$github->realizarPrimerPush($rutaRepositorio, $nombreDirectorio);
 
 // Commit y push en GIT
 $github->realizarPush($rutaRepositorio);

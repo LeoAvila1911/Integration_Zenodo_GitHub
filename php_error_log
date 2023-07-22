@@ -649,3 +649,19 @@ Stack trace:
 #6 {main}
   thrown in C:\xampp\htdocs\Integration_Zenodo_GitHub\modelos\ventas.modelo.php on line 158
 [21-Jul-2023 18:31:49 Europe/Berlin] contador de desconexiones ventas1
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones ventas
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones categorias
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones clientes4
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones productos2
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones ventas1
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones productos2
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones productos7
+[22-Jul-2023 05:21:05 Europe/Berlin] contador de desconexiones productos2
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones ventas
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones categorias
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones clientes4
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones productos2
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones ventas1
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones productos2
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones productos7
+[22-Jul-2023 05:39:34 Europe/Berlin] contador de desconexiones productos2

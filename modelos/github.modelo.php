@@ -3,7 +3,7 @@
 class Github
 {
 
-    function crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio)
+    function crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio, $accessToken)
     {
         //Datos del nuevo repositorio
         //$repoName = 'Prueba Crear Repositorio'; // Cambiar al nombre que desees
@@ -12,7 +12,7 @@ class Github
 
         // Datos de autenticación
         //$githubUsername = 'LeoAvila1911';
-        $accessToken = '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';
+        //$accessToken = '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';
 
         // URL de la API de GitHub para crear repositorios
         $apiUrl = 'https://api.github.com/user/repos';
@@ -58,13 +58,11 @@ class Github
         return $result;
     }
 
-
-    public function realizarPush($rutaRepositorio)
+    public function realizarPrimerPush($rutaRepositorio, $nombreDirectorio)
     {
-        // Reemplaza con el mensaje del commit
-        $commitMessage = 'Commit inicial';
         // Agrega más comandos para cada carpeta que desees incluir en el push
         $commitCommands = array(
+            'echo "# ' . $nombreDirectorio . '" >> README.md',
             'cd ' . $rutaRepositorio,
             'git init',
             'git add README.md',
@@ -72,6 +70,20 @@ class Github
             'git branch -M main',
             'git remote add origin ' . $rutaRepositorio . '.git',
             'git push -u origin main',
+        );
+
+        // Lectura de comandos 
+        foreach ($commitCommands as $command) {
+            exec($command);
+        }
+    }
+
+    public function realizarPush($rutaRepositorio)
+    {
+        // Reemplaza con el mensaje del commit
+        $commitMessage = 'Commit inicial';
+        // Agrega más comandos para cada carpeta que desees incluir en el push
+        $commitCommands = array(
             'cd ' . $rutaRepositorio . ' && git add . && git commit -m "' . $commitMessage . '"'
         );
 
