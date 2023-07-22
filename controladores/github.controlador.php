@@ -20,11 +20,21 @@ $zenodo->actualizarTokenGit($tabla, $where);
 
 // Inicialización de variables
 $commit = $_REQUEST['commit'];
-$tag = $_REQUEST['tag'];
+$tagName = $_REQUEST['tag'];
 $releaseName = $_REQUEST['nomtag'];
 $releaseBody = $_REQUEST['desctag'];
+$rutaRepositorio = $_REQUEST['repositorio'];
+$nombreDirectorio = basename($rutaRepositorio);
+$descripcionRepositorio = $_REQUEST['repoDescription'];
 
-$github->realizarPush();
+// Creación de repositorio en GIT
+$github->crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio);
 
-$github->crearRelease($tag, $releaseName, $releaseBody, $githubToken);
+// Commit y push en GIT
+$github->realizarPush($rutaRepositorio);
+
+// Creación de la versión release y el tag
+$github->crearRelease($tagName, $releaseName, $releaseBody, $githubToken, $nombreDirectorio);
+
+// Redireccionamiento a la vista
 header('Location: ../github?github=success');

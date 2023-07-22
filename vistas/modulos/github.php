@@ -54,6 +54,38 @@ if ($_SESSION["perfil"] == "Especial") {
               <div class="box">
 
                 <!--=====================================
+                REPOSITORIO
+                ======================================-->
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-file"></i></span>
+
+                    <input type="input" placeholder="Ruta del repositorio" class="form-control" name="repositorio">
+
+                  </div>
+
+                </div>
+
+                <!--=====================================
+                DESCRIPCIÓN REPOSITORIO
+                ======================================-->
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-file"></i></span>
+
+                    <input type="input" placeholder="Descripción del repositorio" class="form-control" name="repoDescription">
+
+                  </div>
+
+                </div>
+
+                <!--=====================================
                 NOMBRE COMMIT
                 ======================================-->
 
@@ -63,7 +95,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
                     <span class="input-group-addon"><i class="fa fa-list"></i></span>
 
-                    <input type="text" placeholder="Nombre del commit" class="form-control" name="commit" id="commit" value="">
+                    <input type="text" placeholder="Nombre del commit" class="form-control" name="commit" id="commit">
 
 
                   </div>
@@ -80,7 +112,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <input type="text" placeholder="Versión del tag" class="form-control" name="tag" value="">
+                    <input type="text" placeholder="Versión del tag" class="form-control" name="tag">
                   </div>
 
                 </div>
@@ -95,7 +127,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <input type="text" placeholder="Nombre del tag" class="form-control" name="nomtag" value="">
+                    <input type="text" placeholder="Nombre del tag" class="form-control" name="nomtag">
                   </div>
 
                 </div>
@@ -110,7 +142,7 @@ if ($_SESSION["perfil"] == "Especial") {
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <input type="text" placeholder="Descripción del tag" class="form-control" name="desctag" value="">
+                    <input type="text" placeholder="Descripción del tag" class="form-control" name="desctag">
 
                   </div>
 
@@ -121,7 +153,7 @@ if ($_SESSION["perfil"] == "Especial") {
                 TOKEN ACCESS
                 ======================================-->
 
-    
+
 
                 <!--=====================================
                 ENTRADA MÉTODO DE PAGO
@@ -151,22 +183,22 @@ if ($_SESSION["perfil"] == "Especial") {
 </div>
 
 <script>
-	// Obtener el parámetro de la URL
-	const urlParams = new URLSearchParams(window.location.search);
-	const github = urlParams.get('github');
+  // Obtener el parámetro de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const github = urlParams.get('github');
 
-	// Verificar si hay una alerta y mostrarla
-	if (github === 'success') {
-		swal({
-			type: "success",
-			title: "El archivo se exportó a GitHub correctamente",
-			showConfirmButton: true,
-			confirmButtonText: "Cerrar",
-			closeOnConfirm: false
-		}).then(function(result) {
-			if (result.value) {
-				window.location = "github";
-			}
-		});
-	}
+  // Verificar si hay una alerta y mostrarla
+  if (github === 'success') {
+    swal({
+      type: "success",
+      title: "El archivo se exportó a GitHub correctamente",
+      showConfirmButton: true,
+      confirmButtonText: "Cerrar",
+      closeOnConfirm: false
+    }).then(function(result) {
+      if (result.value) {
+        window.location = "github";
+      }
+    });
+  }
 </script>

@@ -2,44 +2,105 @@
 
 class Github
 {
-    public function realizarPush()
-    {
-        $repoName = 'Integration_Zenodo_GitHub'; // Reemplaza con el nombre de tu repositorio
-        $commitMessage = 'prueba 0.1.1'; // Reemplaza con el mensaje del commit
-        $githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
 
-        $commitCommands = array(
-            'cd C:\xampp\htdocs\Integration_Zenodo_GitHub && git add . && git commit -m "' . $commitMessage . '"',
-            // Agrega más comandos para cada carpeta que desees incluir en el push
+    function crearRepositorioGitHub($nombreDirectorio, $descripcionRepositorio)
+    {
+        //Datos del nuevo repositorio
+        //$repoName = 'Prueba Crear Repositorio'; // Cambiar al nombre que desees
+        //$repoDescription = 'Prueba Crear Repositorio'; // Cambiar a la descripción que desees
+        $private = false; // Cambiar a true para crear un repositorio privado
+
+        // Datos de autenticación
+        //$githubUsername = 'LeoAvila1911';
+        $accessToken = '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';
+
+        // URL de la API de GitHub para crear repositorios
+        $apiUrl = 'https://api.github.com/user/repos';
+
+        // Datos para la solicitud POST
+        $data = array(
+            'name' => $nombreDirectorio,
+            'description' => $descripcionRepositorio,
+            'private' => $private
         );
 
+        // Convertir los datos a formato JSON
+        $dataJson = json_encode($data);
+
+        // Configurar la solicitud cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'PHP Script');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Authorization: token ' . $accessToken
+        ));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
+
+        // Ejecutar la solicitud cURL
+        $result = curl_exec($ch);
+
+        // Verificar el resultado y cerrar la solicitud cURL
+        if ($result === false) {
+            echo 'Error en la solicitud cURL: ' . curl_error($ch);
+        } else {
+            $response = json_decode($result, true);
+            if (isset($response['html_url'])) {
+                echo 'Repositorio creado exitosamente. URL: ' . $response['html_url'];
+            } else {
+                echo 'Error al crear el repositorio. Detalles: ' . print_r($response, true);
+            }
+        }
+        curl_close($ch);
+
+        return $result;
+    }
+
+
+    public function realizarPush($rutaRepositorio)
+    {
+        // Reemplaza con el mensaje del commit
+        $commitMessage = 'Commit inicial';
+        // Agrega más comandos para cada carpeta que desees incluir en el push
+        $commitCommands = array(
+            'cd ' . $rutaRepositorio,
+            'git init',
+            'git add README.md',
+            'git commit -m "first commit"',
+            'git branch -M main',
+            'git remote add origin ' . $rutaRepositorio . '.git',
+            'git push -u origin main',
+            'cd ' . $rutaRepositorio . ' && git add . && git commit -m "' . $commitMessage . '"'
+        );
+
+        // Lectura de comandos 
         foreach ($commitCommands as $command) {
             exec($command);
         }
 
-        $pushCommand = 'cd C:\xampp\htdocs\Integration_Zenodo_GitHub && git push origin main'; // Reemplaza /ruta/a/repo con la ruta a tu repositorio local
-        exec($pushCommand);
+        // Push de comandos 
+        $pushCommand = 'cd ' . $rutaRepositorio . ' && git push origin main';
 
+        exec($pushCommand);
     }
 
-    public function crearRelease($tag, $releaseName, $releaseBody, $githubToken)
+    public function crearRelease($tag, $releaseName, $releaseBody, $githubToken, $nombreDirectorio)
     {
-        $owner = 'LeoAvila1911'; // Reemplaza con el nombre del propietario del repositorio
-        $repo = 'Integration_Zenodo_GitHub'; // Reemplaza con el nombre de tu repositorio
-        //$tag = 'v4.0.0'; // Reemplaza con la etiqueta (tag) del release
-        //$releaseName = 'Release 4.0.0'; // Reemplaza con el nombre del release
-        //$releaseBody = 'Prueba Release 4.0.0'; // Reemplaza con la descripción del release
-        //$githubToken = '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'; // Reemplaza con tu token de acceso personal de GitHub
-
-        $url = "https://api.github.com/repos/{$owner}/{$repo}/releases";
-
+        // Datos del repositorio
+        $owner = 'LeoAvila1911';
+        $url = "https://api.github.com/repos/{$owner}/{$nombreDirectorio}/releases";
         $data = array(
             'tag_name' => $tag,
             'name' => $releaseName,
-            'body' => $releaseBody);
+            'body' => $releaseBody
+        );
 
+        // Transformación a json
         $jsonData = json_encode($data);
 
+        // Ejecución de api github
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -51,9 +112,6 @@ class Github
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
         $response = curl_exec($ch);
         curl_close($ch);
-        /* print_r($response);
-        exit;
- */
+        return $response;
     }
-
 }
