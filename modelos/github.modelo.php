@@ -55,24 +55,33 @@ class Github
         }
         curl_close($ch);
 
-        return $result;
+        return $response['html_url'];
     }
 
-    public function realizarPrimerPush($rutaRepositorio, $nombreDirectorio)
+    public function realizarPrimerPush($rutaRepositorioLocal, $nombreDirectorio, $rutaRepositorioRemoto)
     {
         // Crear el contenido que deseas agregar al archivo README.md
         $contenido = "# " . $nombreDirectorio . "\nEste es el primer commit";
 
-        // Agregar los comandos necesarios para el commit y push
+        // Agregar el contenido al archivo README.md
+        $archivoREADME = $rutaRepositorioLocal . '/README.md';
+        file_put_contents($archivoREADME, $contenido);
+
+        // Agregar el comando para inicializar el repositorio Git en la ruta especificada
+        $gitInitCommand = 'git -C "' . $rutaRepositorioLocal . '" init';
+        exec($gitInitCommand);
+
+        // Agregar el contenido al archivo README.md
+        $echoCommand = 'echo "' . $contenido . '" >> "' . $rutaRepositorioLocal . '/README.md"';
+        exec($echoCommand);
+
+        // Agregar los comandos para realizar el commit y push
         $commitCommands = array(
-            'cd ' . $rutaRepositorio,
-            'git init',
-            'echo "' . $contenido . '" >> README.md', // Agregar el contenido al archivo README.md
-            'git add README.md',
-            'git commit -m "first commit"',
-            'git branch -M main',
-            'git remote add origin https://github.com/LeoAvila1911/' . $nombreDirectorio . '.git',
-            'git push -u origin main',
+            'git -C "' . $rutaRepositorioLocal . '" add .',
+            'git -C "' . $rutaRepositorioLocal . '" commit -m "first commit"',
+            'git -C "' . $rutaRepositorioLocal . '" branch -M main',
+            'git -C "' . $rutaRepositorioLocal . '" remote add origin ' . $rutaRepositorioRemoto,
+            'git -C "' . $rutaRepositorioLocal . '" push -u origin main',
         );
 
         // Ejecutar los comandos
@@ -82,8 +91,7 @@ class Github
     }
 
 
-
-    public function realizarPush($rutaRepositorio)
+    public function realizarCommitPush($rutaRepositorio)
     {
         // Reemplaza con el mensaje del commit
         $commitMessage = 'Commit inicial';
